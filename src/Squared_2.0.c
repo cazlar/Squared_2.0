@@ -9,7 +9,7 @@ Window *window;
 
 #define US_DATE false // true == MM/DD, false == DD/MM
 #define NO_ZERO false // true == replaces leading Zero for hour, day, month with a "cycler"
-#define DAY_NAMES true // true == WW/DD. false == DD/MM or MM/DD depending on US_DATE
+#define DAY_NAMES false // true == WW/DD. false == DD/MM or MM/DD depending on US_DATE
 #define TILE_SIZE 10
 #define NUMSLOTS 8
 #define SPACING_X TILE_SIZE
