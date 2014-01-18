@@ -9,6 +9,7 @@ Window *window;
 
 #define US_DATE false // true == MM/DD, false == DD/MM
 #define NO_ZERO false // true == replaces leading Zero for hour, day, month with a "cycler"
+#define DAY_NAMES true // true == WW/DD. false == DD/MM or MM/DD depending on US_DATE
 #define TILE_SIZE 10
 #define NUMSLOTS 8
 #define SPACING_X TILE_SIZE
@@ -104,7 +105,74 @@ unsigned char blocks[][5][5] =  {{
 	{1,0,1,0,1},
 	{1,0,1,0,1},
 	{1,0,1,0,1}
-}};
+}, { //M days (12)
+        {1,0,0,0,1},
+        {1,1,0,1,1},
+        {1,1,1,1,1},
+        {1,0,1,0,1},
+        {1,0,1,0,1}
+    }, { //O 13
+        {1,1,1,1,1},
+        {1,0,0,0,1},
+        {1,0,1,0,1},
+        {1,0,0,0,1},
+        {1,1,1,1,1}
+    }, { //T 14
+        {1,1,1,1,1},
+        {0,0,1,0,0},
+        {1,0,1,0,1},
+        {1,0,1,0,1},
+        {1,0,1,0,1}
+    }, { // U 15
+        {1,0,1,0,1},
+        {1,0,1,0,1},
+        {1,0,1,0,1},
+        {1,0,0,0,1},
+        {1,1,1,1,1}
+    }, { // W 16
+        {1,0,1,0,1},
+        {1,0,1,0,1},
+        {1,1,1,1,1},
+        {1,1,0,1,1},
+        {1,0,0,0,1}
+    }, { // E 17
+        {1,1,1,1,1},
+        {1,0,0,0,0},
+        {1,1,1,0,1},
+        {1,0,0,0,0},
+        {1,1,1,1,1}
+    }, { // H 18
+        {1,0,1,0,1},
+        {1,0,0,0,1},
+        {1,1,1,1,1},
+        {1,0,0,0,1},
+        {1,0,1,0,1}
+    }, { //F 19
+        {1,1,1,1,1},
+        {1,0,0,0,0},
+        {1,1,1,0,1},
+        {1,0,0,0,1},
+        {1,0,0,0,1}
+    }, { //R 20
+        {1,1,1,1,0},
+        {1,0,0,1,0},
+        {1,1,1,0,0},
+        {1,0,0,1,0},
+        {1,0,0,0,1}
+    }, { // S 21
+        {1,1,1,1,1},
+        {1,0,0,0,0},
+        {1,1,1,1,1},
+        {0,0,0,0,1},
+        {1,1,1,1,1}
+    }, { // A 22
+    {0,1,1,1,0},
+    {1,0,0,0,1},
+    {1,1,1,1,1},
+    {1,0,0,0,1},
+    {1,0,1,0,1}
+   }
+};
 unsigned char clean[][5][5] =  {{
 	{1,1,1,1,1},
 	{1,0,0,0,1},
@@ -177,7 +245,74 @@ unsigned char clean[][5][5] =  {{
 	{1,1,1,1,1},
 	{1,1,1,1,1},
 	{1,1,1,1,1}
-}};
+}, { //M days (12)
+        {1,0,0,0,1},
+        {1,1,0,1,1},
+        {1,1,1,1,1},
+        {1,0,1,0,1},
+        {1,0,1,0,1}
+    }, { //O 13
+        {1,1,1,1,1},
+        {1,0,0,0,1},
+        {1,0,0,0,1},
+        {1,0,0,0,1},
+        {1,1,1,1,1}
+    }, { //T 14
+        {1,1,1,1,1},
+        {0,0,1,0,0},
+        {0,0,1,0,0},
+        {0,0,1,0,0},
+        {0,0,1,0,0}
+    }, { // U 15
+        {1,0,0,0,1},
+        {1,0,0,0,1},
+        {1,0,0,0,1},
+        {1,0,0,0,1},
+        {1,1,1,1,1}
+    }, { // W 16
+        {1,0,1,0,1},
+        {1,0,1,0,1},
+        {1,1,1,1,1},
+        {1,1,0,1,1},
+        {1,0,0,0,1}
+    }, { // E 17
+        {1,1,1,1,1},
+        {1,0,0,0,0},
+        {1,1,1,0,0},
+        {1,0,0,0,0},
+        {1,1,1,1,1}
+    }, { // H 18
+        {1,0,0,0,1},
+        {1,0,0,0,1},
+        {1,1,1,1,1},
+        {1,0,0,0,1},
+        {1,0,0,0,1}
+    }, { //F 19
+        {1,1,1,1,1},
+        {1,0,0,0,0},
+        {1,1,1,0,0},
+        {1,0,0,0,0},
+        {1,0,0,0,0}
+    }, { //R 20
+        {1,1,1,1,0},
+        {1,0,0,1,0},
+        {1,1,1,0,0},
+        {1,0,0,1,0},
+        {1,0,0,0,1}
+    }, { // S 21
+        {1,1,1,1,1},
+        {1,0,0,0,0},
+        {1,1,1,1,1},
+        {0,0,0,0,1},
+        {1,1,1,1,1}
+    }, { // A 22
+    {0,1,1,1,0},
+    {1,0,0,0,1},
+    {1,1,1,1,1},
+    {1,0,0,0,1},
+    {1,0,0,0,1}
+   }
+};
 
 int startDigit[NUMSLOTS] = {
 	11,10,10,11,11,10,10,11
@@ -292,7 +427,7 @@ static unsigned short get_display_hour(unsigned short hour) {
 
 
 void handle_tick(struct tm *t, TimeUnits units_changed) {
-	int ho, mi, da, mo, i;
+	int ho, mi, da, mo, dn, i;
 
     if (splashEnded) {
         if (animation_is_scheduled(anim))
@@ -302,6 +437,7 @@ void handle_tick(struct tm *t, TimeUnits units_changed) {
         mi = t->tm_min;
         da = t->tm_mday;
         mo = t->tm_mon+1;
+        dn = t->tm_wday; //nb 0=sunday
         
         for (i=0; i<NUMSLOTS; i++) {
             slot[i].prevDigit = slot[i].curDigit;
@@ -311,17 +447,56 @@ void handle_tick(struct tm *t, TimeUnits units_changed) {
         slot[1].curDigit = ho%10;
         slot[2].curDigit = mi/10;
         slot[3].curDigit = mi%10;
-		if (US_DATE) {
-			slot[6].curDigit = da/10;
-			slot[7].curDigit = da%10;
-			slot[4].curDigit = mo/10;
-			slot[5].curDigit = mo%10;
-		} else {
-			slot[4].curDigit = da/10;
-			slot[5].curDigit = da%10;
-			slot[6].curDigit = mo/10;
-			slot[7].curDigit = mo%10;
-		}
+
+	if (DAY_NAMES) {
+            switch (dn) {
+                case 0:
+                    slot[4].curDigit = 21;
+                    slot[5].curDigit = 15;
+                    break;
+                case 1:
+                    slot[4].curDigit = 12;
+                    slot[5].curDigit = 13;
+                    break;
+                case 2:
+                    slot[4].curDigit = 14;
+                    slot[5].curDigit = 15;
+                    break;
+                case 3:
+                    slot[4].curDigit = 16;
+                    slot[5].curDigit = 17;
+                    break;
+                case 4:
+                    slot[4].curDigit = 14;
+                    slot[5].curDigit = 18;
+                    break;
+                case 5:
+                    slot[4].curDigit = 19;
+                    slot[5].curDigit = 20;
+                    break;
+                case 6:
+                    slot[4].curDigit = 21;
+                    slot[5].curDigit = 22;
+                    break;
+                default:
+                    break;
+            }
+            slot[6].curDigit = da/10;
+            slot[7].curDigit = da%10;
+            
+       } else {
+            if (US_DATE) {
+                slot[6].curDigit = da/10;
+                slot[7].curDigit = da%10;
+                slot[4].curDigit = mo/10;
+                slot[5].curDigit = mo%10;
+            } else {
+                slot[4].curDigit = da/10;
+                slot[5].curDigit = da%10;
+                slot[6].curDigit = mo/10;
+                slot[7].curDigit = mo%10;
+            }
+        }
 		
 		if (NO_ZERO) {
 			if (slot[0].curDigit == 0) {
